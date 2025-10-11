@@ -1,0 +1,129 @@
+.landing-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    padding: 1.5rem 0;
+}
+
+.content-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.account-form-container {
+    background-color: #1f2937;
+    border: 1px solid #374151;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+.form-step { display: none; }
+.form-step.active { display: block; }
+
+.account-form-container h1 { 
+    size: 1.875rem; 
+    font-weight: 700;
+    color: #ffffff;
+}
+.account-form-container p {
+    margin-top: 0.5rem; 
+    margin-bottom: 2rem; 
+    color: #ffffff; }
+
+#account-form input, .name-inputs {
+    width: 100%;
+    background-color: #374151;
+    border: 1px solid #4b5563;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+}
+
+#account-form > input {
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+}
+
+/* CORRECTED STYLES FOR NAME INPUTS */
+.name-inputs {
+    display: flex;
+    gap: 1rem;
+    background-color: transparent; /* Remove background from the container */
+    border: none;
+    margin-bottom: 1rem; /* Add margin to the container */
+}
+.name-inputs input { 
+    background-color: #374151;
+    border: 1px solid #4b5563;
+    padding: 0.75rem 1rem;
+    margin: 0; 
+}
+
+.form-btn { 
+    width: 100%; 
+    justify-content: center; 
+    padding-top: 0.75rem; 
+    padding-bottom: 0.75rem; 
+}
+
+.account-type-selector {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.account-type-selector label {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #4b5563;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+.account-type-selector input:checked + label, 
+.account-type-selector label:has(input:checked) {
+    background: linear-gradient(90deg, #818CF8, #a059f8); 
+    color: #fff; 
+    box-shadow: 0 4px 15px -5px rgba(192, 132, 252, 0.4);
+}
+.account-type-selector input {
+    display: none;
+}
+
+/* Verification Step Styles */
+
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.pin-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+.pin-inputs input {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.25rem;
+    background-color: #374151;
+    border: 1px solid #4b5563;
+    color: #fff;
+    border-radius: 0.5rem;
+}
+.resend-link {
+    display: block;
+    margin-top: 1.5rem;
+    color: #9ca3af;
+    font-size: 0.875rem;
+}

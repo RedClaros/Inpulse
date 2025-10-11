@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - InPulse</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="pagestyles.css">
+    <link rel="stylesheet" href="account.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="bg-shape shape1"></div>
+        <div class="bg-shape shape2"></div>
+
+        <header class="landing-header">
+            <div class="header-content">
+                <a href="landing.html" class="logo">InPulse</a>
+                <nav class="main-nav">
+                    <a href="plans.html">View Plans</a>
+                    <a href="login.html" class="btn btn-secondary">Sign In</a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="content-main">
+            <div class="account-form-container">
+                <!-- Step 1: Form -->
+                <div id="form-step-1" class="form-step active">
+                    <h1>Create your account</h1>
+                    <p>Start your journey with InPulse today.</p>
+                    <form id="account-form">
+                        <div class="account-type-selector">
+                            <label><input type="radio" name="accountType" value="individual" checked> Individual</label>
+                            <label><input type="radio" name="accountType" value="business"> Business</label>
+                        </div>
+                        <div class="name-inputs">
+                            <input type="text" placeholder="First Name" required>
+                            <input type="text" placeholder="Last Name" required>
+                        </div>
+                        <input type="company name" placeholder="Company Name">
+                        <input type="email" placeholder="Email Address" required>
+                        <input type="tel" placeholder="Phone Number" required>
+			            <input type="password" placeholder="Password" required>
+                        <button type="submit" class="btn btn-primary form-btn">Create Account</button>
+                    </form>
+                </div>
+                
+                <!-- Step 2: Verification -->
+                <div id="form-step-2" class="form-step">
+                    <h1>Verify your account</h1>
+                    <p>A 6-digit PIN has been sent to your email/phone.</p>
+                    <div class="pin-inputs">
+                        <label for="digit1" class="visually-hidden">Digit 1</label>
+                        <input id="digit1" type="text" maxlength="1" title="Enter first digit">
+
+                        <label for="digit2" class="visually-hidden">Digit 2</label>
+                        <input id="digit2" type="text" maxlength="1" title="Enter second digit">
+
+                        <label for="digit3" class="visually-hidden">Digit 3</label>
+                        <input id="digit3" type="text" maxlength="1" title="Enter third digit">
+
+                        <label for="digit4" class="visually-hidden">Digit 4</label>
+                        <input id="digit4" type="text" maxlength="1" title="Enter fourth digit">
+
+                        <label for="digit5" class="visually-hidden">Digit 5</label>
+                        <input id="digit5" type="text" maxlength="1" title="Enter fifth digit">
+
+                        <label for="digit6" class="visually-hidden">Digit 6</label>
+                        <input id="digit6" type="text" maxlength="1" title="Enter sixth digit">
+                    </div>
+                    <button class="btn btn-primary form-btn">Verify and Continue</button>
+                    <a href="#" class="resend-link">Didn't receive a code? Resend</a>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="account.js"></script>
+</body>
+</html>

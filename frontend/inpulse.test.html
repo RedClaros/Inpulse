@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InPulse</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <h1 id="sidebar-logo" class="sidebar-logo">InPulse</h1>
+                <button id="sidebar-toggle-btn" class="sidebar-toggle-btn">
+                    <i data-lucide="chevron-left"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-page="Dashboard"><i data-lucide="layout-dashboard"></i><span class="nav-text">Dashboard</span></a>
+                <a href="#" class="nav-link" data-page="Campaigns"><i data-lucide="megaphone"></i><span class="nav-text">Campaigns</span></a>
+                <a href="#" class="nav-link" data-page="Analytics"><i data-lucide="bar-chart-3"></i><span class="nav-text">Analytics</span></a>
+                <a href="#" class="nav-link" data-page="Sales"><i data-lucide="dollar-sign"></i><span class="nav-text">Sales</span></a>
+                <a href="#" class="nav-link" data-page="Products"><i data-lucide="package"></i><span class="nav-text">Products</span></a>
+                <a href="#" class="nav-link" data-page="Journeys"><i data-lucide="git-merge"></i><span class="nav-text">Journeys</span></a>
+                <a href="#" class="nav-link" data-page="InSight"><i data-lucide="brain-circuit"></i><span class="nav-text">InSight AI</span></a>
+                <a href="#" class="nav-link" data-page="Productivity"><i data-lucide="list-todo"></i><span class="nav-text">Productivity</span></a>
+                <a href="#" class="nav-link" data-page="Team"><i data-lucide="users"></i><span class="nav-text">Team</span></a>
+                <a href="#" class="nav-link" data-page="Messages"><i data-lucide="message-square"></i><span class="nav-text">Messages</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-link" data-page="Settings"><i data-lucide="settings"></i><span class="nav-text">Settings</span></a>
+            </div>
+        </aside>
+
+        <div class="main-content">
+            <header class="header">
+                <h2 id="page-title" class="page=title">Dashboard</h2>
+                <div class="header-actions">
+                    <div class="notification-icon">
+                        <i data-lucide="bell"></i>
+                        <span class="notification-dot"></span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="https://i.pravatar.cc/40?u=jane" alt="User Avatar" class="user-avatar-img" id="header-avatar-img">
+                        <span id="user-name-span">Jane Doe</span>
+                    </div>
+                    <button id="sign-out-btn" class="sign-out-btn" title="Sign Out">
+                        <i data-lucide="log-out"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <main id="main-app-content" class="main-app-content">
+                <section id="page-Dashboard" class="page"></section>
+                <section id="page-Campaigns" class="page"></section>
+                <section id="page-Analytics" class="page"></section>
+                <section id="page-Sales" class="page"></section>
+                <section id="page-Products" class="page"></section>
+                <section id="page-Journeys" class="page"></section>
+                <section id="page-InSight" class="page"></section>
+                <section id="page-Productivity" class="page"></section>
+                <section id="page-Team" class="page"></section>
+                <section id="page-Messages" class="page"></section>
+                <section id="page-Settings" class="page"></section>
+            </main>
+        </div>
+    </div>
+    
+    <div id="main-modal" class="modal-overlay">
+        <div class="modal-content"></div>
+    </div>
+
+    <div id="confetti-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
