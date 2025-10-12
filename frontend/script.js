@@ -21,8 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     try {
         const [userResponse, teamResponse] = await Promise.all([
-            fetch('http://localhost:5001/api/user/me', { headers: { 'Authorization': `Bearer ${token}` } }),
-            fetch('http://localhost:5001/api/team', { headers: { 'Authorization': `Bearer ${token}` } })
+            fetch('https://inpulse-3zws.onrender.com/api/user/me', {
+  headers: { 'Authorization': `Bearer ${token}` }
+}),
+            fetch('https://inpulse-3zws.onrender.com/api/team', { headers: { 'Authorization': `Bearer ${token}` } })
         ]);
 
         if (!userResponse.ok || !teamResponse.ok) throw new Error('Auth or data fetch failed');
@@ -386,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const response = await fetch('http://localhost:5001/api/notifications', {
+        const response = await fetch('https://inpulse-3zws.onrender.com/api/notifications', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
@@ -464,19 +466,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const token = localStorage.getItem('authToken');
 
         // --- 1. FETCH ALL DATA AT THE BEGINNING ---
-        const statsResponse = await fetch('http://localhost:5001/api/dashboard/stats', {
+        const statsResponse = await fetch('https://inpulse-3zws.onrender.com/api/dashboard/stats', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!statsResponse.ok) throw new Error('Failed to fetch dashboard stats');
         const liveStats = await statsResponse.json(); // Data for KPIs
 
-        const tasksResponse = await fetch('http://localhost:5001/api/tasks', {
+        const tasksResponse = await fetch('https://inpulse-3zws.onrender.com/api/tasks', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!tasksResponse.ok) throw new Error('Failed to fetch tasks');
         liveDataCache.tasks = await tasksResponse.json(); // Data for lists
 
-        const chartResponse = await fetch('http://localhost:5001/api/dashboard/revenue-chart', {
+        const chartResponse = await fetch('https://inpulse-3zws.onrender.com/api/dashboard/revenue-chart', {
     headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!chartResponse.ok) throw new Error('Failed to fetch chart data');
@@ -658,7 +660,7 @@ document.addEventListener('DOMContentLoaded', () => {
     page.innerHTML = `<div>Loading Campaigns...</div>`;
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch('http://localhost:5001/api/campaigns', { headers: { 'Authorization': `Bearer ${token}` } });
+        const response = await fetch('https://inpulse-3zws.onrender.com/api/campaigns', { headers: { 'Authorization': `Bearer ${token}` } });
         if (!response.ok) throw new Error('Failed to fetch campaigns');
         
         const liveCampaigns = await response.json();
@@ -743,7 +745,7 @@ document.addEventListener('DOMContentLoaded', () => {
         page.innerHTML = `<div>Loading Analytics...</div>`;
         try {
             const token = localStorage.getItem('authToken');
-            const response = await fetch('http://localhost:5001/api/campaigns', { headers: { 'Authorization': `Bearer ${token}` } });
+            const response = await fetch('https://inpulse-3zws.onrender.com/api/campaigns', { headers: { 'Authorization': `Bearer ${token}` } });
             if (!response.ok) throw new Error('Failed to fetch campaign data for analytics');
             const liveCampaigns = await response.json();
             const platforms = ['All', ...new Set(liveCampaigns.map(c => c.platform))];
@@ -784,7 +786,7 @@ document.addEventListener('DOMContentLoaded', () => {
         page.innerHTML = `<div>Loading Sales Data...</div>`;
         try {
             const token = localStorage.getItem('authToken');
-            const response = await fetch('http://localhost:5001/api/sales', { headers: { 'Authorization': `Bearer ${token}` } });
+            const response = await fetch('https://inpulse-3zws.onrender.com/api/sales', { headers: { 'Authorization': `Bearer ${token}` } });
             if (!response.ok) throw new Error('Failed to fetch sales');
             const liveSales = await response.json();
             const sources = ['All', ...new Set(liveSales.map(s => s.source || 'Direct'))];
@@ -815,7 +817,7 @@ document.addEventListener('DOMContentLoaded', () => {
         page.innerHTML = `<div>Loading Product Intelligence...</div>`;
         try {
             const token = localStorage.getItem('authToken');
-            const response = await fetch('http://localhost:5001/api/products', { headers: { 'Authorization': `Bearer ${token}` } });
+            const response = await fetch('https://inpulse-3zws.onrender.com/api/products', { headers: { 'Authorization': `Bearer ${token}` } });
             if (!response.ok) throw new Error('Failed to fetch products');
             const liveProducts = await response.json();
             if (liveProducts.length === 0) {
@@ -842,7 +844,7 @@ document.addEventListener('DOMContentLoaded', () => {
         page.innerHTML = `<div>Loading Customer Journeys...</div>`;
         try {
             const token = localStorage.getItem('authToken');
-            const response = await fetch('http://localhost:5001/api/journeys', { headers: { 'Authorization': `Bearer ${token}` } });
+            const response = await fetch('https://inpulse-3zws.onrender.com/api/journeys', { headers: { 'Authorization': `Bearer ${token}` } });
             if (!response.ok) { const errorData = await response.json().catch(() => ({})); throw new Error(errorData.error || `Failed to fetch journeys with status ${response.status}`); }
             const liveJourneys = await response.json();
             if (liveJourneys.length === 0) {
@@ -878,7 +880,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch(`http://localhost:5001/api/tasks/${taskId}`, {
+        const response = await fetch(`https://inpulse-3zws.onrender.com/api/tasks/${taskId}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!response.ok) throw new Error('Failed to fetch task details.');
@@ -987,7 +989,7 @@ document.addEventListener('DOMContentLoaded', () => {
             (async () => {
                 const token = localStorage.getItem('authToken');
                 try {
-                    await fetch(`http://localhost:5001/api/tasks/${taskId}`, {
+                    await fetch(`https://inpulse-3zws.onrender.com/api/tasks/${taskId}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -1013,7 +1015,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch('http://localhost:5001/api/tasks', { headers: { 'Authorization': `Bearer ${token}` } });
+        const response = await fetch('https://inpulse-3zws.onrender.com/api/tasks', { headers: { 'Authorization': `Bearer ${token}` } });
         if (!response.ok) throw new Error('Failed to fetch tasks');
         const liveTasks = await response.json();
 
@@ -1138,7 +1140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     page.innerHTML = `<div>Loading Team Members...</div>`;
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch('http://localhost:5001/api/team', { headers: { 'Authorization': `Bearer ${token}` } });
+        const response = await fetch('https://inpulse-3zws.onrender.com/api/api/team', { headers: { 'Authorization': `Bearer ${token}` } });
         if (!response.ok) throw new Error('Failed to fetch team members');
         
         const liveTeamMembers = await response.json();
@@ -1209,7 +1211,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch('http://localhost:5001/api/conversations', {
+        const response = await fetch('https://inpulse-3zws.onrender.com/api/conversations', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!response.ok) throw new Error('Failed to fetch conversations.');
@@ -1312,7 +1314,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let conversation;
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch(`http://localhost:5001/api/conversations/${conversationId}`, {
+        const response = await fetch(`https://inpulse-3zws.onrender.com/api/conversations/${conversationId}`, {
              headers: { 'Authorization': `Bearer ${token}` }
         });
 
@@ -1397,7 +1399,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Fetch all the data we need for the page ---
         const userResponse = await fetch('http://localhost:5001/api/user/me', { headers: { 'Authorization': `Bearer ${token}` } });
-        const integrationsResponse = await fetch('http://localhost:5001/api/integrations', { headers: { 'Authorization': `Bearer ${token}` } });
+        const integrationsResponse = await fetch('https://inpulse-3zws.onrender.com/api/integrations', { headers: { 'Authorization': `Bearer ${token}` } });
         
         if (!userResponse.ok || !integrationsResponse.ok) {
             throw new Error('Failed to load settings data.');
@@ -1556,7 +1558,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let teamManagementHTML = '';
         if (userData.role === 'Admin' || userData.role === 'Owner') {
             // Fetch team members only if the user is an admin
-            const teamResponse = await fetch('http://localhost:5001/api/team', { headers: { 'Authorization': `Bearer ${token}` } });
+            const teamResponse = await fetch('https://inpulse-3zws.onrender.com/api/team', { headers: { 'Authorization': `Bearer ${token}` } });
             if (!teamResponse.ok) throw new Error('Failed to fetch team data.');
             const allTeamMembers = await teamResponse.json();
 
@@ -1710,7 +1712,7 @@ document.addEventListener('click', e => {
         if (isVisible && document.querySelector('.notification-dot').style.display !== 'none') {
             (async () => {
                 const token = localStorage.getItem('authToken');
-                await fetch('http://localhost:5001/api/notifications/mark-as-read', {
+                await fetch('https://inpulse-3zws.onrender.com/api/notifications/mark-as-read', {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -1754,7 +1756,7 @@ if (userSelectItem) {
         try {
             const token = localStorage.getItem('authToken');
             // Step 1: Start the conversation and get the new conversationId
-            const startResponse = await fetch('http://localhost:5001/api/conversations/start', {
+            const startResponse = await fetch('https://inpulse-3zws.onrender.com/api/conversations/start', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ participantId })
@@ -1770,7 +1772,7 @@ if (userSelectItem) {
             await renderMessageDetail(newConversationId);
 
             // Step 3: Fetch the updated list of all conversations
-            const listResponse = await fetch('http://localhost:5001/api/conversations', {
+            const listResponse = await fetch('https://inpulse-3zws.onrender.com/api/api/conversations', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const liveConversations = await listResponse.json();
@@ -1895,7 +1897,7 @@ if (connectBtn) {
             (async () => {
                 try {
                     const token = localStorage.getItem('authToken');
-                    const response = await fetch(`http://localhost:5001/api/team/${userIdToDelete}`, {
+                    const response = await fetch(`https://inpulse-3zws.onrender.com/api/team/${userIdToDelete}`, {
                         method: 'DELETE',
                         headers: { 'Authorization': `Bearer ${token}` }
                     });
@@ -1921,7 +1923,7 @@ if (connectBtn) {
     if (confirm('Are you sure you want to disconnect this integration?')) {
         (async () => {
             const token = localStorage.getItem('authToken');
-            await fetch(`http://localhost:5001/api/integrations/${integrationId}`, {
+            await fetch(`https://inpulse-3zws.onrender.com/api/integrations/${integrationId}`, {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -1940,7 +1942,7 @@ if (connectBtn) {
             try {
                 const token = localStorage.getItem('authToken');
                 // It fetches from the API...
-                const response = await fetch('http://localhost:5001/api/insight/report', {
+                const response = await fetch('https://inpulse-3zws.onrender.com/api/insight/report', {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 if (!response.ok) throw new Error('Failed to generate report');
@@ -2021,7 +2023,7 @@ if (e.target.closest('#sync-facebook-btn')) {
     (async () => {
         try {
             const token = localStorage.getItem('authToken');
-            const response = await fetch('http://localhost:5001/api/sync/facebook', {
+            const response = await fetch('https://inpulse-3zws.onrender.com/api/sync/facebook', {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -2079,7 +2081,7 @@ if (productivityCard) {
                 (async () => {
                     try {
                         const token = localStorage.getItem('authToken');
-                        const response = await fetch(`http://localhost:5001/api/tasks/${taskId}`, {
+                        const response = await fetch(`https://inpulse-3zws.onrender.com/api/tasks/${taskId}`, {
                             method: 'DELETE',
                             headers: { 'Authorization': `Bearer ${token}` }
                         });
@@ -2281,7 +2283,7 @@ if (actionBtnInModal) {
         }
 
         const token = localStorage.getItem('authToken');
-        const response = await fetch(`http://localhost:5001/api/tasks/${taskId}`, {
+        const response = await fetch(`https://inpulse-3zws.onrender.com/api/tasks/${taskId}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
             body: JSON.stringify({ status: 'DONE' })
@@ -2349,7 +2351,7 @@ mainAppContent.addEventListener('change', e => {
     (async () => {
         try {
             const token = localStorage.getItem('authToken');
-            const response = await fetch('http://localhost:5001/api/upload/avatar', {
+            const response = await fetch('https://inpulse-3zws.onrender.com/api/upload/avatar', {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}` },
                 body: formData
@@ -2404,7 +2406,7 @@ mainAppContent.addEventListener('change', e => {
         (async () => {
             try {
                 const token = localStorage.getItem('authToken');
-                const response = await fetch('http://localhost:5001/api/messages/upload', {
+                const response = await fetch('https://inpulse-3zws.onrender.com/api/messages/upload', {
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}` },
                     body: formData,
@@ -2469,7 +2471,7 @@ document.addEventListener('submit', e => {
 
                 try {
                     const token = localStorage.getItem('authToken');
-                    const response = await fetch('http://localhost:5001/api/messages', {
+                    const response = await fetch('https://inpulse-3zws.onrender.com/api/api/messages', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -2519,7 +2521,7 @@ document.addEventListener('submit', e => {
 
         try {
             const token = localStorage.getItem('authToken');
-            const response = await fetch('http://localhost:5001/api/user/password', {
+            const response = await fetch('https://inpulse-3zws.onrender.com/api/user/password', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -2551,7 +2553,7 @@ document.addEventListener('submit', e => {
         const token = localStorage.getItem('authToken');
 
         try {
-            const response = await fetch('http://localhost:5001/api/team/invite', {
+            const response = await fetch('https://inpulse-3zws.onrender.com/api/api/team/invite', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -2583,7 +2585,7 @@ document.addEventListener('submit', e => {
 
         try {
             const token = localStorage.getItem('authToken');
-            const response = await fetch('http://localhost:5001/api/user/me', {
+            const response = await fetch('https://inpulse-3zws.onrender.com/api/user/me', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -2625,7 +2627,7 @@ document.addEventListener('submit', e => {
 
             try {
                 const token = localStorage.getItem('authToken');
-                const response = await fetch(`http://localhost:5001/api/tasks/${taskId}`, {
+                const response = await fetch(`https://inpulse-3zws.onrender.com/api/tasks/${taskId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -2668,7 +2670,7 @@ document.addEventListener('submit', e => {
 
             try {
                 const token = localStorage.getItem('authToken');
-                const response = await fetch('http://localhost:5001/api/tasks', {
+                const response = await fetch('https://inpulse-3zws.onrender.com/api/tasks', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                     body: JSON.stringify(taskData)
@@ -2784,7 +2786,7 @@ function initializeKanbanListeners(){
                 (async () => {
                     const token = localStorage.getItem('authToken');
                     try {
-                        await fetch(`http://localhost:5001/api/tasks/${taskId}`, {
+                        await fetch(`https://inpulse-3zws.onrender.com/api/tasks/${taskId}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -2817,7 +2819,7 @@ function initializeKanbanListeners(){
 
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch('http://localhost:5001/api/tasks', {
+        const response = await fetch('https://inpulse-3zws.onrender.com/api/tasks', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!response.ok) throw new Error('Failed to fetch tasks');
