@@ -31,7 +31,12 @@ const notificationRoutes = require('./routes/notificationRoutes');
 const app = express();
 
 // 4. Apply middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://inpulse-frontend.onrender.com',
+  credentials: true
+}));
+
+
 app.use(express.json());
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
