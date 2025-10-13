@@ -105,7 +105,7 @@ router.post('/login', async (req, res) => {
     const user = await prisma.user.findUnique({
       where: { email: loginIdentifier }
     });
-
+	console.log('Queried user:', user);
     // ✅ Defensive check BEFORE accessing user properties
     if (!user) {
       console.warn('No user found for:', loginIdentifier);
