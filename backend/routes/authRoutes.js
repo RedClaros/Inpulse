@@ -93,7 +93,6 @@ router.post('/verify', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-
     console.log('Login request body:', req.body);
 
     const { email, username, password } = req.body;
@@ -128,6 +127,5 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Internal server error.' });
   }
 });
-
 
 module.exports = router;
