@@ -17,12 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const apiResponse = await fetch('http://localhost:5001/api/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    // --- FIX: Send the data with the key "email" to match the backend ---
-                    body: JSON.stringify({ email, password }),
-                });
+                const apiResponse = await fetch('https://inpulse-3zws.onrender.com/api/auth/login', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email, password }),
+});
 
                 const responseData = await apiResponse.json();
 
