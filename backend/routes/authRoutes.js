@@ -106,17 +106,24 @@ router.post('/login', async (req, res) => {
       where: { email: loginIdentifier }
     });
 
+    // ✅ Defensive check BEFORE accessing user properties
     if (!user) {
+      console.warn('No user found for:', loginIdentifier);
       return res.status(401).json({ error: 'User not found.' });
     }
 
-    if (user.status !== 'VERIFIED') {
-      return res.status(403).json({ error: 'Account not verified.' });
+    if (!user.passwordHash) {
+      console.warn('User record missing passwordHash:', user);
+      return res.status(500).json({ error: 'User record is incomplete.' });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
     if (!isPasswordValid) {
       return res.status(401).json({ error: 'Invalid credentials.' });
+    }
+
+    if (user.status !== 'VERIFIED') {
+      return res.status(403).json({ error: 'Account not verified.' });
     }
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '8h' });
@@ -127,5 +134,6 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Internal server error.' });
   }
 });
+
 
 module.exports = router;
