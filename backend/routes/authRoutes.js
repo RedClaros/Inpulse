@@ -105,7 +105,9 @@ router.post('/login', async (req, res) => {
     const user = await prisma.user.findUnique({
       where: { email: loginIdentifier }
     });
-	console.log('Queried user:', user);
+
+    console.log('Queried user:', user); // ✅ This will show null or the user object
+
     // ✅ Defensive check BEFORE accessing user properties
     if (!user) {
       console.warn('No user found for:', loginIdentifier);
@@ -134,6 +136,5 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Internal server error.' });
   }
 });
-
 
 module.exports = router;
