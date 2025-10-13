@@ -92,43 +92,42 @@ router.post('/verify', async (req, res) => {
 
 
 router.post('/login', async (req, res) => {
-    try {
-        // --- FINAL FIX: Accept 'email' OR 'username' from the request body ---
-        const { email, username, password } = req.body;
+  try {
 
-        // Use the value from 'email' if it exists, otherwise use 'username'.
-        const loginIdentifier = email || username;
+    console.log('Login request body:', req.body);
 
-        // Check if an identifier was provided at all.
-        if (!loginIdentifier) {
-            return res.status(400).json({ error: 'Email or username is required.' });
-        }
+    const { email, username, password } = req.body;
+    const loginIdentifier = email || username;
 
-        const user = await prisma.user.findUnique({
-            where: { email: loginIdentifier }
-        });
-
-        if (!user || user.status !== 'VERIFIED') {
-            return res.status(401).json({ error: 'Invalid credentials or unverified account.' });
-        }
-
-        const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
-        if (!isPasswordValid) {
-            return res.status(401).json({ error: 'Invalid credentials.' });
-        }
-
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '8h' });
-
-        res.status(200).json({ token });
-    } catch (error) {
-        // We log the specific Prisma error if it occurs
-        if (error.name === 'PrismaClientValidationError') {
-            console.error('Prisma Validation Error during login:', error.message);
-            return res.status(400).json({ error: 'Invalid login request.' });
-        }
-        console.error('Login error:', error);
-        res.status(500).json({ error: 'Internal server error.' });
+    if (!loginIdentifier || !password) {
+      return res.status(400).json({ error: 'Email and password are required.' });
     }
+
+    const user = await prisma.user.findUnique({
+      where: { email: loginIdentifier }
+    });
+
+    if (!user) {
+      return res.status(401).json({ error: 'User not found.' });
+    }
+
+    if (user.status !== 'VERIFIED') {
+      return res.status(403).json({ error: 'Account not verified.' });
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid credentials.' });
+    }
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '8h' });
+    res.status(200).json({ token });
+
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
 });
+
 
 module.exports = router;
