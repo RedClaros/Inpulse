@@ -108,11 +108,13 @@ router.post('/login', async (req, res) => {
 
     console.log('Queried user:', user);
 
+    // Defensive guard: prevent crash if user is undefined
     if (!user) {
       console.warn('User not found for:', loginIdentifier);
       return res.status(401).json({ error: 'User not found.' });
     }
 
+    // Defensive guard: prevent crash if passwordHash is missing
     if (!user.passwordHash) {
       console.warn('Missing passwordHash for:', loginIdentifier);
       return res.status(500).json({ error: 'User record incomplete.' });
