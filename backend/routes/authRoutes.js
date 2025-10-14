@@ -106,21 +106,21 @@ router.post('/login', async (req, res) => {
       where: { email: loginIdentifier }
     });
 
-    console.log('Queried user:', user); // ✅ This will show null or the user object
+    console.log('Queried user:', user);
 
-    // ✅ Defensive check BEFORE accessing user properties
     if (!user) {
-      console.warn('No user found for:', loginIdentifier);
+      console.warn('User not found for:', loginIdentifier);
       return res.status(401).json({ error: 'User not found.' });
     }
 
     if (!user.passwordHash) {
-      console.warn('User record missing passwordHash:', user);
-      return res.status(500).json({ error: 'User record is incomplete.' });
+      console.warn('Missing passwordHash for:', loginIdentifier);
+      return res.status(500).json({ error: 'User record incomplete.' });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
     if (!isPasswordValid) {
+      console.warn('Invalid password for:', loginIdentifier);
       return res.status(401).json({ error: 'Invalid credentials.' });
     }
 
@@ -129,11 +129,11 @@ router.post('/login', async (req, res) => {
     }
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '8h' });
-    res.status(200).json({ token });
+    return res.status(200).json({ token });
 
   } catch (error) {
     console.error('Login error:', error);
-    res.status(500).json({ error: 'Internal server error.' });
+    return res.status(500).json({ error: 'Internal server error.' });
   }
 });
 
