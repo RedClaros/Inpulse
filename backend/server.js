@@ -67,8 +67,6 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/invitations', invitationRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/notifications', notificationRoutes);
-
-import healthRoute from './routes/health.js';
 app.use('/health', healthRoute);
 
 // 7. A simple base route to confirm the server is working
