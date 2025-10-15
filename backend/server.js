@@ -38,6 +38,7 @@ app.use(cors({
 app.use(express.json());
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
+app.use(passport.session());
 app.use('/uploads', express.static('uploads'));
 
 // 5. Configure Passport
