@@ -106,13 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
             id: 'interactiveFocus',
             afterDraw: (chart) => {
                 // Only draw if the tooltip is active (i.e., user is hovering)
-                if (chart.tooltip._active && chart.tooltip._active.length) {
+                if (chart.tooltip && chart.tooltip._active && chart.tooltip._active.length) {
                     const activePoint = chart.tooltip._active[0];
                     const ctx = chart.ctx;
                     const x = activePoint.element.x;
                     const topY = chart.scales.y.top;
                     const bottomY = chart.scales.y.bottom;
-    
+
                     // Draw the vertical line
                     ctx.save();
                     ctx.beginPath();
