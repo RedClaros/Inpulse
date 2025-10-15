@@ -23,6 +23,7 @@ const messageRoutes = require('./routes/messageRoutes');
 const invitationRoutes = require('./routes/invitationRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
+const healthRoute = require('./routes/health');
 
 // 3. Initialize the Express app
 const app = express();
