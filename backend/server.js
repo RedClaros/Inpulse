@@ -1,6 +1,3 @@
-// server.js - FINAL VERSION with all routes re-enabled
-
-// 1. Load environment variables. This is the absolute first step.
 require('dotenv').config();
 
 if (!process.env.DATABASE_URL || !process.env.JWT_SECRET) {
@@ -70,6 +67,9 @@ app.use('/api/messages', messageRoutes);
 app.use('/api/invitations', invitationRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/notifications', notificationRoutes);
+
+import healthRoute from './routes/health.js';
+app.use('/health', healthRoute);
 
 // 7. A simple base route to confirm the server is working
 app.get('/', (req, res) => {
