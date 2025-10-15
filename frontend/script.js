@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('user-name-span').textContent = `${currentUser.firstName} ${currentUser.lastName}`;
 
         if (currentUser.avatar) {
-            const avatarUrl = 'https://inpulse-3zws.onrender.com/api/uploads' + currentUser.avatar;
+            const avatarUrl = 'https://inpulse-3zws.onrender.com' + currentUser.avatar;
             document.getElementById('header-avatar-img').src = currentUser.avatar + '?t=' + Date.now();
         }
         fetchAndRenderNotifications(); // Initial fetch
