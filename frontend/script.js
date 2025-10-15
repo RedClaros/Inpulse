@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('user-name-span').textContent = `${currentUser.firstName} ${currentUser.lastName}`;
 
         if (currentUser.avatar) {
-            document.getElementById('header-avatar-img').src = currentUser.avatar + '?t=' + Date.now;
+            document.getElementById('header-avatar-img').src = currentUser.avatar + '?t=' + Date.now();
         }
         fetchAndRenderNotifications(); // Initial fetch
         setInterval(fetchAndRenderNotifications, 30000); // Poll every 30 seconds
