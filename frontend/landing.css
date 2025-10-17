@@ -4,13 +4,13 @@ body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     color: #000000;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .page-wrapper {
     position: relative;
     background-color: #0F172A;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 /* --- Animated Background --- */
