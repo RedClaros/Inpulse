@@ -29,10 +29,19 @@ const healthRoute = require('./routes/health');
 const app = express();
 
 // 4. Apply middleware
+const allowedOrigins = ['https://inpulse-frontend.onrender.com'];
+
 app.use(cors({
-  origin: 'https://inpulse-frontend.onrender.com',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
+
 
 
 app.use(express.json());
