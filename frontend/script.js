@@ -1356,7 +1356,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (msg.type === 'FILE') {
             messageContentHTML = `
-                <a href="http://localhost:5001${msg.content}" target="_blank" rel="noopener noreferrer" class="file-link">
+                <a href=https://inpulse-3zws.onrender.com${msg.content}" target="_blank" rel="noopener noreferrer" class="file-link">
                     <i data-lucide="file-text"></i>
                     <span>${msg.fileName || 'View File'}</span>
                 </a>`;
@@ -1399,7 +1399,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const token = localStorage.getItem('authToken');
 
         // --- Fetch all the data we need for the page ---
-        const userResponse = await fetch('http://localhost:5001/api/user/me', { headers: { 'Authorization': `Bearer ${token}` } });
+        const userResponse = await fetch('https://inpulse-3zws.onrender.com/api/user/me', { headers: { 'Authorization': `Bearer ${token}` } });
         const integrationsResponse = await fetch('https://inpulse-3zws.onrender.com/api/integrations', { headers: { 'Authorization': `Bearer ${token}` } });
         
         if (!userResponse.ok || !integrationsResponse.ok) {
@@ -1867,7 +1867,7 @@ if (connectBtn) {
     // Instead of a fetch call, we redirect the entire page to the backend auth route.
     // The backend will then redirect the user to Facebook.
     // We add the JWT token to the URL so the backend can identify the user.
-    window.location.href = `http://localhost:5001/api/integrations/auth/${platform}?token=${token}`;
+    window.location.href = `https://inpulse-3zws.onrender.com/api/integrations/auth/${platform}?token=${token}`;
 }
 
     // --- ADD THIS BLOCK TO HANDLE CLICKS ON A CONVERSATION ---
