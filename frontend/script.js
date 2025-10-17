@@ -40,8 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('user-name-span').textContent = `${currentUser.firstName} ${currentUser.lastName}`;
 
         if (currentUser.avatar) {
-            const avatarUrl = 'https://inpulse-3zws.onrender.com' + currentUser.avatar;
-            document.getElementById('header-avatar-img').src = currentUser.avatar + '?t=' + Date.now();
+            const avatarUrl = currentUser.avatar
+                .replace('http://localhost:5001', 'https://inpulse-3zws.onrender.com') 
+                .replace('https://localhost:5001', 'https://inpulse-3zws.onrender.com');
+            document.getElementById('header-avatar-img').src = avatarUrl + '?t=' + Date.now();
         }
         fetchAndRenderNotifications(); // Initial fetch
         setInterval(fetchAndRenderNotifications, 30000); // Poll every 30 seconds
