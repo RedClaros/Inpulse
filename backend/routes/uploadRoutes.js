@@ -29,7 +29,7 @@ router.post('/avatar', authenticateToken, upload.single('avatar'), async (req, r
 
         const userId = req.user.id;
         // The URL that the frontend can use to access the file
-        const avatarUrl = `http://localhost:5001/uploads/${req.file.filename}`;
+        const avatarUrl = `https://inpulse-3zws.onrender.com/uploads/${req.file.filename}`;
 
         // Update the user's avatar URL in the database
         await prisma.user.update({
