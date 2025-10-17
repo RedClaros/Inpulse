@@ -1143,7 +1143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     page.innerHTML = `<div>Loading Team Members...</div>`;
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch('https://inpulse-3zws.onrender.com/api/api/team', { headers: { 'Authorization': `Bearer ${token}` } });
+        const response = await fetch('https://inpulse-3zws.onrender.com/api/team', { headers: { 'Authorization': `Bearer ${token}` } });
         if (!response.ok) throw new Error('Failed to fetch team members');
         
         const liveTeamMembers = await response.json();
@@ -1153,7 +1153,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const memberRowsHTML = liveTeamMembers.map(member => {
-            const avatarUrl = member.avatar || `https://inpulse-3zws.onrender.com${member.email}`;
+            let avatarUrl = (member.avatar || `https://inpulse-3zws.onrender.com/default-avatar.png`)
+                .replace('http://localhost:5001', 'https://inpulse-3zws.onrender.com')
+                .replace('https://localhost:5001', 'https://inpulse-3zws.onrender.com');
             
             // --- NEW: Logic to style different roles ---
             let roleClass = 'role-member'; // Default class
