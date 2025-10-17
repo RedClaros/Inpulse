@@ -1,17 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+/* This is the key fix */
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     color: #000000;
-    /* Removed overflow-x: hidden; from here */
 }
 
 .page-wrapper {
-    position: relative;
+    position: relative; /* This is necessary for the absolute shapes */
     background-color: #0F172A;
     min-height: 100vh;
-    overflow-x: hidden; /* This is the key fix for the horizontal scrollbar */
+    /* No overflow property needed here anymore */
 }
 
 /* --- Animated Background --- */
@@ -43,11 +47,10 @@ body {
     z-index: 10;
     padding: 1.5rem 0;
     background-color: rgb(15 23 42 / 0.8);
-    backdrop-filter: blur(8px); /* Added for a nice glass effect */
+    backdrop-filter: blur(8px);
 }
 .header-content {
-    max-width: 100%;
-    width: 100%;
+    max-width: 1200px; /* Use max-width for large screens */
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
@@ -59,7 +62,7 @@ body {
     font-weight: 800;
     background: linear-gradient(90deg, #818CF8, #C084FC);
     -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text; /* Vendor prefix for background-clip */
+    -webkit-background-clip: text;
     background-clip: text;
 }
 .main-nav {
@@ -72,7 +75,9 @@ body {
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s;
-    opacity: 1;
+}
+.main-nav a:hover {
+    color: #a059f8;
 }
 
 /* --- Buttons --- */
@@ -100,7 +105,6 @@ body {
     box-shadow: 0 7px 20px -5px rgba(192, 132, 252, 0.6); 
 }
 
-/* NOTE: .btn-secondary was identical to .btn-primary. Kept it for potential future styling. */
 .btn-secondary { 
     background: linear-gradient(90deg, #818CF8, #a059f8); 
     color: #fff; 
@@ -150,15 +154,15 @@ body {
 }
 .hero-subtitle {
     font-size: 1.25rem;
-    color: #ffffff;
+    color: #e2e8f0;
     max-width: 600px;
     margin: 0 auto 2.5rem auto;
-    opacity: 0.9; /* Opacity should be a value between 0 and 1 */
+    opacity: 1;
 }
 
-/* --- Features Section 0 --- */
+/* --- Features Section --- */
 .features {
-    padding: 6rem 2rem; /* Added horizontal padding for consistency */
+    padding: 6rem 2rem;
 }
 .section-title {
     font-size: 2.5rem;
@@ -172,12 +176,13 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 4rem;
     padding-top: 5%;
-    /* Let the parent container handle padding */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 .feature-card {
     text-align: center;
     padding: 2rem;
-    color: #ffffff;
+    color: #e2e8f0;
 }
 .feature-card i {
     margin-bottom: 1.5rem;
@@ -190,8 +195,7 @@ body {
     color: #ffffff; 
 }
 .feature-card p { 
-    color: #ffffff; 
-    opacity: 0.9;
+    color: #e2e8f0; 
 }
 
 /* Feature Sections */
@@ -199,17 +203,12 @@ body {
     padding: 6rem 2rem;
 }
 .feature-content {
-    max-width: 1200px; /* Added max-width for very large screens */
-    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
-}
-.feature-section.reversed .feature-content {
-    /* This rule is redundant as it's the same as the one above. Can be removed if not needed. */
-    grid-template-columns: 1fr 1fr; 
 }
 .feature-section.reversed .feature-text {
     order: 2;
@@ -223,9 +222,8 @@ body {
 }
 .feature-text p {
     font-size: 1.125rem;
-    color: #ffffff;
+    color: #e2e8f0;
     line-height: 1.6;
-    opacity: 0.9;
 }
 .feature-image img {
     width: 100%;
@@ -238,17 +236,15 @@ body {
 .landing-footer {
     position: relative;
     z-index: 5;
-    background-color: #1f2937;
+    background-color: #1e293b;
     padding: 4rem 2rem 2rem;
-    border-top: 1px solid #374151; /* Slightly lighter border */
-    opacity: 0.9;
+    border-top: 1px solid #334155;
 }
 .footer-content {
-    max-width: 1200px; /* Added max-width */
-    width: 100%;
+    max-width: 1200px;
     margin: 0 auto 2rem auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Increased min-width for better spacing */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
 }
 .footer-column h4 {
@@ -259,15 +255,13 @@ body {
 }
 .footer-column a {
     display: block;
-    color: #cbd5e1; /* Slightly softer color */
+    color: #cbd5e1;
     text-decoration: none;
     margin-bottom: 0.75rem;
-    transition: color 0.2s, transform 0.2s;
+    transition: color 0.2s;
 }
 .footer-column a:hover {
     color: #818CF8;
-    transform: translateX(2px);
-    text-shadow: none; /* Text shadow on small text can look messy */
 }
 
 .social-icons {
@@ -277,102 +271,76 @@ body {
 
 .footer-bottom {
     text-align: center;
-    color: #9ca3af; /* Softer color */
+    color: #94a3b8;
     padding-top: 2rem;
-    border-top: 1px solid #374151;
-}
-
-.footer-subscribe-container p {
-    color: #cbd5e1;
-    max-width: 400px;
-    margin-bottom: 1.5rem;
-}
-
-.footer-subscribe-container h4 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #ffffff;
+    border-top: 1px solid #334155;
 }
 
 .subscribe-form input {
-    flex-grow: 1;
+    width: 100%;
     border: 1px solid #4b5563;
-    background-color: #374151;
+    background-color: #334155;
     color: #ffffff;
     padding: 0.75rem;
     border-radius: 0.5rem;
     outline: none;
 }
 
+
 /* --- Responsive Styles --- */
 
 /* Tablets */
 @media (max-width: 1024px) {
-    .features-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 3rem;
-    }
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-/* Mobile Devices */
+/* Phones */
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
     }
-
+    
     .main-nav {
         flex-direction: column;
-        align-items: flex-start; /* Align nav items to the left */
+        align-items: flex-start;
         gap: 1rem;
-        padding-left: 0;
     }
 
     .hero-title {
         font-size: 2.5rem;
     }
-
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
     
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
     .features-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
     }
-
-    .feature-content, 
-    .feature-section.reversed .feature-content { 
-        grid-template-columns: 1fr; 
+    
+    .feature-content {
+        grid-template-columns: 1fr;
     }
-
-    .feature-image {
-        margin-top: 2rem;
-    }
-
-    .feature-section.reversed .feature-text { 
-        order: 0; /* Reset order to default */
+    
+    .feature-section.reversed .feature-text {
+        order: 0;
     }
 
     .feature-text h2 {
         font-size: 1.75rem;
     }
-
+    
     .feature-text p {
         font-size: 1rem;
     }
-
+    
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
-    }
-
-    .footer-column {
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Center links in columns */
     }
 
     .social-icons {
