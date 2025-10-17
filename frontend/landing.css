@@ -10,6 +10,7 @@ body {
 .page-wrapper {
     position: relative;
     background-color: #0F172A;
+    min-height: 100vh;
 }
 
 /* --- Animated Background --- */
@@ -34,7 +35,7 @@ body {
 
 /* --- Header --- */
 .landing-header {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -111,6 +112,7 @@ body {
 
 /* --- Main Content --- */
 .landing-main {
+    padding-top: 5rem;
     position: relative;
     z-index: 5;
 }
@@ -162,7 +164,7 @@ body {
 .features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16rem;
+    gap: 4rem;
     padding-top: 5%;
     padding-left: 10%;
     padding-right: 10%;
@@ -346,4 +348,9 @@ body {
   .social-icons {
     justify-content: center;
   }
+}
+
+html, body {
+    height: auto;
+    overflow-x: hidden;
 }
