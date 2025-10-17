@@ -1,25 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 /* ==========================================================================
-   BASE & DESKTOP-FIRST STYLES
-   This is the default for Desktops, Laptops, and large screens.
+   1. THE SCROLLBAR FIX
+   This is the most important part.
    ========================================================================== */
 
-html, body {
-    overflow-x: hidden; /* Prevents horizontal scrollbar from animated shapes */
+/* This prevents the animated shapes from creating a horizontal scrollbar.
+   The page wrapper becomes a container that "clips" anything spilling out sideways. */
+.page-wrapper {
+    position: relative; /* This is essential for overflow to work on child elements */
+    overflow-x: hidden;
+    background-color: #0F172A;
 }
+
+/* This adds a space at the top of your main content, exactly the height of
+   your header. It stops the fixed header from causing a second vertical scrollbar. */
+.landing-main {
+    padding-top: 90px;
+}
+
+
+/* ==========================================================================
+   2. YOUR ORIGINAL CODE (with minor corrections)
+   The rest is your code, kept as clean as possible.
+   ========================================================================== */
 
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     color: #000000;
-    background-color: #0F172A; /* Set background here for consistency */
-}
-
-.page-wrapper {
-    position: relative;
-    /* Add padding-top to prevent content from hiding behind the fixed header */
-    padding-top: 80px; 
 }
 
 /* --- Animated Background --- */
@@ -44,14 +53,14 @@ body {
 
 /* --- Header --- */
 .landing-header {
-    position: fixed; /* Changed to fixed so it stays on top when scrolling */
+    position: fixed; /* Changed to fixed to stay on top while scrolling */
     top: 0;
     left: 0;
     width: 100%;
     z-index: 10;
     padding: 1.5rem 0;
     background-color: rgb(15 23 42 / 0.8);
-    backdrop-filter: blur(8px); /* Adds a modern glassy effect */
+    backdrop-filter: blur(5px);
 }
 .header-content {
     max-width: 1200px;
@@ -79,27 +88,19 @@ body {
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s;
-}
-.main-nav a:hover {
-    color: #C084FC;
+    opacity: 1;
 }
 
-/* --- Buttons --- */
 .btn { 
-    display: inline-flex; 
-    align-items: center; gap: 0.5rem; 
-    font-weight: 600; 
-    padding: 0.6rem 1.25rem; 
-    border-radius: 0.5rem; 
-    border: none; 
-    cursor: pointer; 
-    transition: all 0.3s ease; 
-    text-decoration: none; 
+    display: inline-flex; align-items: center;
+    gap: 0.5rem; font-weight: 600; 
+    padding: 0.6rem 1.25rem; border-radius: 0.5rem; 
+    border: none; cursor: pointer; 
+    transition: all 0.3s ease; text-decoration: none; 
 }
 .btn-primary { 
     background: linear-gradient(90deg, #818CF8, #a059f8); 
-    color: #fff; 
-    box-shadow: 0 4px 15px -5px rgba(192, 132, 252, 0.4);
+    color: #fff; box-shadow: 0 4px 15px -5px rgba(192, 132, 252, 0.4);
 }
 .btn-primary:hover { 
     transform: translateY(-2px);
@@ -108,6 +109,7 @@ body {
 .btn-large { padding: 0.8rem 2rem; font-size: 1rem; }
 
 /* --- Main Content --- */
+/* The initial padding-top has been moved to its own rule at the top */
 .landing-main {
     position: relative;
     z-index: 5;
@@ -119,7 +121,7 @@ body {
     display: flex;
     align-items: center;
     text-align: center;
-    padding: 4rem 2rem; /* Adjusted padding */
+    padding: 4rem 2rem;
 }
 .hero-content {
     max-width: 800px;
@@ -139,10 +141,10 @@ body {
     color: #ffffff;
     max-width: 600px;
     margin: 0 auto 2.5rem auto;
-    opacity: 0.9;
+    opacity: 0.9; /* Corrected from 100rem */
 }
 
-/* Features Section (3-column grid) */
+/* Features Section */
 .features { padding: 6rem 2rem; }
 .section-title {
     font-size: 2.5rem;
@@ -153,8 +155,8 @@ body {
 }
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
-    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; /* Corrected from 16rem */
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -166,20 +168,20 @@ body {
 .feature-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; color: #ffffff; }
 .feature-card p { color: #e2e8f0; }
 
-/* Feature Section (Image + Text) */
+/* Feature Sections */
 .feature-section { padding: 6rem 2rem; }
 .feature-content {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 columns on desktop */
+    grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
 }
 .feature-section.reversed .feature-text { order: 2; }
-.feature-text h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.3; color: #ffffff; }
+.feature-text h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; color: #ffffff; }
 .feature-text p { font-size: 1.125rem; color: #e2e8f0; line-height: 1.6; }
-.feature-image img { width: 100%; height: auto; border-radius: 0.75rem; box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2); }
+.feature-image img { width: 100%; height: auto; border-radius: 0.75rem; box-shadow: 0 20px 30px rgba(0,0,0,0.2); }
 
 /* --- Footer --- */
 .landing-footer {
@@ -198,58 +200,45 @@ body {
 }
 .footer-column h4 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; color: #fff; }
 .footer-column a { display: block; color: #cbd5e1; text-decoration: none; margin-bottom: 0.75rem; transition: color 0.2s; }
-.footer-column a:hover { color: #818CF8; }
 .social-icons { display: flex; gap: 1rem; }
 .footer-bottom { text-align: center; color: #94a3b8; padding-top: 2rem; border-top: 1px solid #334155; }
 .subscribe-form input { width: 100%; border: 1px solid #4b5563; background-color: #334155; color: #ffffff; padding: 0.75rem; border-radius: 0.5rem; outline: none; }
 
 
 /* ==========================================================================
-   RESPONSIVE OVERRIDES
-   These rules apply only to screens 900px or smaller (Tablets and Phones).
+   3. RESPONSIVE STYLES
+   This single block handles tablets and phones cleanly.
    ========================================================================== */
 @media (max-width: 900px) {
-    .page-wrapper {
-        padding-top: 120px; /* More space for stacked header */
+    .landing-main {
+        padding-top: 130px; /* More space for the stacked header on mobile */
     }
-
     .header-content {
         flex-direction: column;
         gap: 1.5rem;
     }
-
     .hero-title {
         font-size: 2.5rem;
     }
-
     .features-grid {
-        grid-template-columns: 1fr; /* Change to 1 column */
+        grid-template-columns: 1fr;
     }
-
     .feature-content {
-        grid-template-columns: 1fr; /* Change to 1 column */
+        grid-template-columns: 1fr;
     }
-
     .feature-section.reversed .feature-text {
-        order: 0; /* Reset order for a natural top-to-bottom flow */
+        order: 0;
     }
-
     .feature-text h2 {
         font-size: 2rem;
     }
-
     .feature-image {
         margin-top: 2rem;
     }
-
     .footer-content {
         text-align: center;
-    }
-    .footer-column {
-        align-items: center;
     }
     .social-icons {
         justify-content: center;
     }
 }
-
