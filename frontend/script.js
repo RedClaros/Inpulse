@@ -557,7 +557,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // If we find the assignee in our team list, create their avatar.
             if (assignee) {
-                const avatarUrl = assignee.avatar || `https://i.pravatar.cc/40?u=${assignee.email}`;
+                const avatarUrl = assignee.avatar || `https://inpulse-3zws.onrender.com${assignee.email}`;
                 assigneeAvatarHTML = `<img src="${avatarUrl}" class="assignee-avatar" title="Assigned to ${assignee.firstName}">`;
             }
         }
@@ -610,7 +610,7 @@ document.addEventListener('DOMContentLoaded', () => {
       );
 
       if (assignee) {
-        const avatarUrl = assignee.avatar || `https://i.pravatar.cc/40?u=${assignee.email}`;
+        const avatarUrl = assignee.avatar || `https://inpulse-3zws.onrender.com${assignee.email}`;
         assigneeAvatarHTML = `
           <img 
             src="${avatarUrl}" 
@@ -1151,7 +1151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const memberRowsHTML = liveTeamMembers.map(member => {
-            const avatarUrl = member.avatar || `https://i.pravatar.cc/40?u=${member.email}`;
+            const avatarUrl = member.avatar || `https://inpulse-3zws.onrender.com${member.email}`;
             
             // --- NEW: Logic to style different roles ---
             let roleClass = 'role-member'; // Default class
