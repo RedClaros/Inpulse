@@ -66,6 +66,7 @@ model Campaign {
   spend        Float
   sales        Float
   clicks       Int
+  conversions  Int?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   owner        User     @relation(fields: [userId], references: [id])
