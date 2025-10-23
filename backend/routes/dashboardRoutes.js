@@ -159,7 +159,7 @@ router.get('/stats', authenticateToken, async (req, res) => {
 
     res.status(200).json(dashboardData);
   } catch (error) {
-    console.error("Dashboard stats error:", error);
+    console.error("Dashboard stats error:", error.message, error.stack);
     res.status(500).json({ error: "Failed to fetch dashboard data." });
   }
 });
