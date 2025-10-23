@@ -90,7 +90,7 @@ const engagementRateChange = calculateChange(
             totalRevenue: totalRevenueCurrent, revenueChange: revenueChange,
             totalReach: totalReachCurrent, reachChange: reachChange,
             engagementRate, engagementRateChange,
-            totalConversions: 0, totalConversionsChange: 15.1,
+            totalConversions, totalConversionsChange,
             teamPerformance: {
                 completionRate: completionRate,
                 burnoutRisk: burnoutRisk
