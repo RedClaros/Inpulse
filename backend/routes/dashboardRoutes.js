@@ -60,6 +60,23 @@ const engagementRateChange = calculateChange(
   totalClicksPrevious._sum.clicks || 0
 );
 
+const [currentConversions, previousConversions] = await Promise.all([
+  prisma.campaign.aggregate({
+    _sum: { conversions: true },
+    where: { userId, createdAt: { gte: thirtyDaysAgo } },
+  }),
+  prisma.campaign.aggregate({
+    _sum: { conversions: true },
+    where: { userId, createdAt: { gte: sixtyDaysAgo, lt: thirtyDaysAgo } },
+  }),
+]);
+
+const totalConversions = currentConversions._sum.conversions || 0;
+const totalConversionsChange = calculateChange(
+  totalConversions,
+  previousConversions._sum.conversions || 0
+);
+
 	// Fetch all necessary data in parallel
         const [tasks, teamMembers] = await Promise.all([
             prisma.task.findMany({ where: { userId } }),
