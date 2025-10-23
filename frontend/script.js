@@ -559,7 +559,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // If we find the assignee in our team list, create their avatar.
             if (assignee) {
-                const avatarUrl = assignee.avatar || `https://inpulse-3zws.onrender.com${assignee.email}`;
+                const avatarUrl = (assignee.avatar || `https://i.pravatar.cc/40?u=${assignee.email}`)
+                .replace('http://localhost:5001', 'https://inpulse-3zws.onrender.com')
+                .replace('https://localhost:5001', 'https://inpulse-3zws.onrender.com');
+                ;
                 assigneeAvatarHTML = `<img src="${avatarUrl}" class="assignee-avatar" title="Assigned to ${assignee.firstName}">`;
             }
         }
