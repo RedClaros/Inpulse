@@ -677,13 +677,14 @@ document.addEventListener('DOMContentLoaded', () => {
     page.innerHTML = `<div>Loading Campaigns...</div>`;
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch('https://inpulse-3zws.onrender.com/api/campaigns', { headers: { 'Authorization': `Bearer ${token}` } });
+        const response = await fetch('https://inpulse-3zws.onrender.com/api/campaigns', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
         if (!response.ok) throw new Error('Failed to fetch campaigns');
         
         const liveCampaigns = await response.json();
 
         if (liveCampaigns.length === 0) {
-            // This part now also includes the button so you can sync your first campaigns
             page.innerHTML = `
                 <div class="page-header-actions">
                     <button class="btn btn-primary" id="sync-facebook-btn">
@@ -696,10 +697,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>Click the sync button to pull in your campaign data.</p>
                 </div>`;
             if (window.lucide && typeof window.lucide.createIcons === 'function') {
-  window.lucide.createIcons();
-} else {
-  console.warn("Lucide icons not available. Skipping icon rendering.");
-}
+                window.lucide.createIcons();
+            } else {
+                console.warn("Lucide icons not available. Skipping icon rendering.");
+            }
             return;
         }
 
@@ -721,7 +722,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return `<tr><td>${c.campaignName}</td><td>${c.platform}</td><td><span class="status-chip ${statusClass}">${c.status}</span></td><td>${c.reach.toLocaleString()}</td><td>$${c.spend.toLocaleString()}</td><td>${roas}</td><td>${cpc}</td></tr>`;
         }).join('');
         
-        // --- THIS IS THE CORRECTED PART ---
         page.innerHTML = `
             <div class="grid-4-cols">${kpiCardsHTML}</div>
             <div class="card">
@@ -754,10 +754,10 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>`;
 
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
-  window.lucide.createIcons();
-} else {
-  console.warn("Lucide icons not available. Skipping icon rendering.");
-}
+            window.lucide.createIcons();
+        } else {
+            console.warn("Lucide icons not available. Skipping icon rendering.");
+        }
     } catch (error) {
         console.error("Error rendering campaigns:", error);
         page.innerHTML = `<div>Could not load campaigns. Please try again.</div>`;
