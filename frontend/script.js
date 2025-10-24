@@ -587,7 +587,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- 4. RENDER DYNAMIC COMPONENTS ---
         renderRevenueChart(liveChartData);
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
 
     } catch (error) {
         console.error("Error rendering dashboard:", error);
@@ -645,7 +649,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     todoList.innerHTML = todoTasksHTML || '<p class="empty-list-message">You have no assigned tasks.</p>';
 
-    lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
 }
 
     function recalculateAndUpdateCompletionWidget() {
@@ -687,7 +695,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h3>No Campaigns Found</h3>
                     <p>Click the sync button to pull in your campaign data.</p>
                 </div>`;
-            lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
             return;
         }
 
@@ -741,7 +753,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>`;
 
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
     } catch (error) {
         console.error("Error rendering campaigns:", error);
         page.innerHTML = `<div>Could not load campaigns. Please try again.</div>`;
@@ -762,7 +778,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const filteredCampaigns = platformFilter === 'All' ? liveCampaigns : liveCampaigns.filter(c => c.platform === platformFilter);
             if (filteredCampaigns.length === 0) {
                 page.innerHTML = filterHTML + `<div class="placeholder-card" style="margin-top: 1.5rem;"><i data-lucide="frown"></i><h3>No Data Available</h3><p>There is no analytics data for the selected platform.</p></div>`;
-                lucide.createIcons();
+                if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
                 return;
             }
             const totalReach = filteredCampaigns.reduce((sum, c) => sum + c.reach, 0);
@@ -782,7 +802,11 @@ document.addEventListener('DOMContentLoaded', () => {
             page.innerHTML = `${filterHTML}<div class="grid-4-cols" style="margin-top: 1.5rem;">${kpiCardsHTML}</div><div class="analytics-grid-layout"><div class="analytics-main"><div class="card"><h3 class="card-title">Customer Journey Funnel</h3><div class="chart-container" style="height: 350px;"><canvas id="funnelChart"></canvas></div></div><div class="card"><h3 class="card-title">Platform Performance (Spend vs. Sales)</h3><div class="chart-container" style="height: 350px;"><canvas id="spendVsSalesChart"></canvas></div></div></div><aside class="analytics-sidebar"><div class="card"><h3 class="card-title"><i data-lucide="sparkles"></i> AI Insights for ${platformFilter}</h3><p>AI insights will be generated here based on the filtered data.</p></div></aside></div>`;
             renderFunnelChart(funnelData);
             renderSpendVsSalesChart(platformPerformance);
-            lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
         } catch (error) {
             console.error("Error rendering analytics page:", error);
             page.innerHTML = `<div>Could not load analytics data.</div>`;
@@ -803,7 +827,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const filteredSales = sourceFilter === 'All' ? liveSales : liveSales.filter(s => (s.source || 'Direct') === sourceFilter);
             if (filteredSales.length === 0) {
                 page.innerHTML = filterHTML + `<div class="placeholder-card" style="margin-top: 1.5rem;"><i data-lucide="frown"></i><h3>No Sales Data Found</h3><p>There are no sales records for the selected source.</p></div>`;
-                lucide.createIcons();
+                if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
                 return;
             }
             const totalRevenue = filteredSales.reduce((sum, item) => sum + item.revenue, 0);
@@ -814,7 +842,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const lowSellingHTML = mockData.sales.lowSelling.map(p => `<li><span>${p.name}</span><strong>${p.sales} units</strong></li>`).join('');
             page.innerHTML = `${filterHTML}<div class="grid-3-cols" style="margin-top: 1.5rem;">${kpiCardsHTML}</div><div class="grid-2-cols"><div class="card"><h3 class="card-title"><i data-lucide="trending-up"></i>Top Selling Products</h3><ul class="product-list">${topSellingHTML}</ul></div><div class="card"><h3 class="card-title"><i data-lucide="trending-down"></i>Low Selling Products</h3><ul class="product-list">${lowSellingHTML}</ul></div></div><div class="card"><h3 class="card-title"><i data-lucide="sparkles"></i> AI Sales Forecast for ${sourceFilter}</h3><div class="chart-container" style="height: 300px;"><canvas id="salesForecastChart"></canvas></div></div>`;
             renderSalesForecastChart();
-            lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
         } catch (error) {
             console.error("Error rendering sales page:", error);
             page.innerHTML = `<div>Could not load sales data. Please try again.</div>`;
@@ -831,7 +863,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const liveProducts = await response.json();
             if (liveProducts.length === 0) {
                 page.innerHTML = `<div class="placeholder-card"><i data-lucide="package-search"></i><h3>No Products Found</h3><p>Product data will appear here once sales are recorded.</p></div>`;
-                lucide.createIcons();
+                if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
                 return;
             }
             const productCardsHTML = liveProducts.map(product => {
@@ -841,7 +877,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `<div class="product-card"><h4>${product.name}</h4><div class="product-stats"><div class="product-stat"><span>Inventory</span><strong>${product.inventoryLevel.toLocaleString()}</strong></div><div class="product-stat"><span>Total Sales</span><strong>${product.totalSalesCount}</strong></div><div class="product-stat"><span>Price</span><strong>$${product.salePrice.toFixed(2)}</strong></div><div class="product-stat"><span>Profit Margin</span><strong>${product.profitMargin.toFixed(1)}%</strong></div></div><div class="product-alerts">${alertsHTML || '<p class="no-alerts">No immediate alerts.</p>'}</div></div>`;
             }).join('');
             page.innerHTML = `<div class="page-header-actions"><h3>Product Intelligence</h3></div><div class="product-grid">${productCardsHTML}</div>`;
-            lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
         } catch (error) {
             console.error("Error rendering products page:", error);
             page.innerHTML = `<div>Could not load product data. Please try again later.</div>`;
@@ -858,7 +898,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const liveJourneys = await response.json();
             if (liveJourneys.length === 0) {
                 page.innerHTML = `<div class="placeholder-card"><i data-lucide="git-merge"></i><h3>No Journeys Analyzed</h3><p>Data from your integrations will be analyzed to create customer journeys here. Try running a data sync.</p></div>`;
-                lucide.createIcons();
+                if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
                 return;
             }
             const totalConversions = liveJourneys.filter(j => j.conversion).length;
@@ -874,7 +918,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 return `<div class="journey-card ${journey.conversion ? 'converted' : ''}"><div class="journey-header"><span>${journey.customerId}</span><strong class="journey-value">${journey.conversion ? '$' + journey.conversionValue.toFixed(2) : 'No Conversion'}</strong></div><div class="journey-timeline">${touchpointsHTML}</div></div>`;
             }).join('');
             page.innerHTML = `<div class="grid-3-cols">${kpiCardsHTML}</div><div class="journeys-container">${journeyCardsHTML}</div>`;
-            lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
         } catch (error) {
             console.error("Error rendering journeys page:", error);
             page.innerHTML = `<div>Could not load customer journeys. Error: ${error.message}</div>`;
@@ -947,7 +995,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </form>
         `;
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
     } catch (error) {
         console.error("Error rendering edit task modal:", error);
         modalContent.innerHTML = `<p>Could not load task details. Please try again.</p>`;
@@ -957,18 +1009,30 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderInSight() {
         const page = document.getElementById('page-InSight');
         page.innerHTML = `<div class="insight-container"><div class="insight-header"><div><h2 class="insight-title">Intelligence Report</h2><p class="insight-subtitle">Your AI-powered analysis of all connected data streams.</p></div></div><div id="insight-content"><div class="placeholder-card" style="min-height: 400px;"><i data-lucide="brain-circuit"></i><h3>Unlock Actionable Insights</h3><p>The InSight Engine analyzes your data to find hidden patterns and opportunities.</p><button class="btn btn-primary btn-lg" id="generate-report-btn" style="margin-top: 1rem;"><i data-lucide="sparkles"></i><span>Generate Report</span></button></div></div></div>`;
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
     }
     
     function displayInsightReport(report) {
         const contentArea = document.getElementById('insight-content');
         if (!contentArea || !report || !report.attributionInsight) {
             contentArea.innerHTML = `<div class="placeholder-card"><i data-lucide="alert-triangle"></i><h3>Could Not Generate Report</h3><p>Not enough data was available.</p></div>`;
-            lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
             return;
         }
         contentArea.innerHTML = `<div class="insight-report-header"><h4>Generated Insights</h4><span>${report.generatedDate}</span></div><div class="insight-card"><div class="insight-card-header"><div class="insight-card-icon" style="background-color: #cffafe;"><i data-lucide="git-merge" style="color: #0891b2;"></i></div><h3 class="insight-card-title">Cross-Channel Attribution</h3></div><div class="insight-card-body"><p>${report.attributionInsight.text}</p></div></div><div class="insight-card high-impact"><div class="insight-card-header"><div class="insight-card-icon" style="background-color: #dcfce7;"><i data-lucide="package-search" style="color: #16a34a;"></i></div><h3 class="insight-card-title">Inventory Opportunity</h3></div><div class="insight-card-body"><p>${report.inventoryInsight.text}</p></div></div>`;
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
     }
     
     function initializeCalendarDND() {
@@ -1132,7 +1196,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         page.innerHTML = `${productivityHeaderHTML}${viewContentHTML}`;
         
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
         if (view === 'calendar') {
             initializeCalendarDND();
         } else {
@@ -1209,7 +1277,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>`;
             
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
     } catch (error) {
         console.error("Error rendering Team page:", error);
         page.innerHTML = `<div>Could not load team members.</div>`;
@@ -1231,7 +1303,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (liveConversations.length === 0) {
             page.innerHTML = `<div class="messages-layout"><div class="conversation-list"><div class="messages-header"><h3>Inbox</h3><button class="btn btn-primary btn-sm" id="new-message-btn" title="New Message"><i data-lucide="plus"></i></button></div><div class="conversation-items"></div></div><div class="message-view"><div class="message-view-placeholder"><i data-lucide="inbox"></i><p>You have no messages yet.</p></div></div></div>`;
-            lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
             return;
         }
 
@@ -1270,7 +1346,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                         </div>
                     </div>`;
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
     } catch (error) {
         console.error("Error rendering messages:", error);
         page.innerHTML = `<div>Could not load messages. Please try again later.</div>`;
@@ -1287,7 +1367,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (usersToList.length === 0) {
             modalContent.innerHTML = `<div class="modal-header"><h3 class="modal-title">New Message</h3><button class="modal-close-btn"><i data-lucide="x"></i></button></div><p>There are no other users to message.</p>`;
-            lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
             return;
         }
 
@@ -1305,7 +1389,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="user-select-list">${userListHTML}</div>
         `;
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
 
     } catch (error) {
         console.error("Error showing new message modal:", error);
@@ -1353,7 +1441,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 <button type="submit" class="btn btn-primary" title="Send Message"><i data-lucide="send"></i></button>
             </form>
         `;
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
         return;
     }
 
@@ -1393,7 +1485,11 @@ document.addEventListener('DOMContentLoaded', () => {
         </form>
     `;
     
-    lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
     
     const messageArea = document.querySelector('.message-area');
     if (messageArea) {
@@ -1630,7 +1726,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>`;
         
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
     } catch (error) {
         console.error(error);
         page.innerHTML = `<div>Could not load settings.</div>`;
@@ -1947,7 +2047,11 @@ if (connectBtn) {
         const btn = e.target.closest('#generate-report-btn');
         btn.disabled = true;
         btn.innerHTML = `<i data-lucide="refresh-cw" class="animate-spin"></i><span>Analyzing Data...</span>`;
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
 
         (async () => {
             try {
@@ -2029,7 +2133,11 @@ if (e.target.closest('#sync-facebook-btn')) {
     const btn = e.target.closest('#sync-facebook-btn');
     btn.disabled = true;
     btn.innerHTML = `<i data-lucide="refresh-cw" class="animate-spin"></i><span>Syncing...</span>`;
-    lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
 
     (async () => {
         try {
@@ -2052,7 +2160,11 @@ if (e.target.closest('#sync-facebook-btn')) {
             // Re-enable the button on failure
             btn.disabled = false;
             btn.innerHTML = `<i data-lucide="refresh-cw"></i><span>Sync Facebook Data</span>`;
-            lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
         }
     })();
 }
@@ -2206,7 +2318,11 @@ if (actionBtnInModal) {
                                 <i data-lucide="check-circle-2" class="icon-xs"></i>
                             </button>`;
             todoList.appendChild(li);
-            lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
         }
         
         // --- FIX: Use liveTeamMembers to find the assignee ---
@@ -2245,7 +2361,11 @@ if (actionBtnInModal) {
             }
             
             chatLog.innerHTML += `<div class="ai-chat-message ai-response">${aiResponseHTML}</div>`;
-            lucide.createIcons();
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
             chatLog.scrollTop = chatLog.scrollHeight;
         }, 1000);
     }
@@ -2759,7 +2879,11 @@ function showAssignTaskModal(memberId, memberName) {
     `;
 
     mainModal.classList.add('active');
-    lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
 }
 
     // MODIFIED: To update the central mockData on drag-and-drop
@@ -2964,7 +3088,11 @@ function initializeKanbanListeners(){
             ${viewContentHTML}
         `;
         
-        lucide.createIcons();
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+  window.lucide.createIcons();
+} else {
+  console.warn("Lucide icons not available. Skipping icon rendering.");
+}
         if (view === 'calendar') {
             initializeCalendarDND();
         } else {
