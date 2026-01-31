@@ -109,6 +109,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
         function renderRevenueChart(revenueData) {
+                if (typeof Chart === 'undefined') {
+            console.error("Chart.js is blocked or not loaded.");
+            return; 
+        }
         const ctx = document.getElementById('revenueChart').getContext('2d');
         const labels = revenueData.map(d => d.date);
         const data = revenueData.map(d => d.revenue);
