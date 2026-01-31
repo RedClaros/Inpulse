@@ -53,14 +53,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (currentUser.avatar) {
             const avatarUrl = currentUser.avatar
-                .replace('http://localhost:5001', 'https://inpulse-3zws.onrender.com') 
-                .replace('https://localhost:5001', 'https://inpulse-3zws.onrender.com');
+                .replace('https://inpulse-3zws.onrender.com') 
+                .replace('https://inpulse-3zws.onrender.com');
             document.getElementById('header-avatar-img').src = avatarUrl + '?t=' + Date.now();
         }
         fetchAndRenderNotifications(); // Initial fetch
         setInterval(fetchAndRenderNotifications, 30000); // Poll every 30 seconds
         
         switchPage('Dashboard');
+
+        init();
 
     } catch (error) {
         console.error('Initialization failed:', error);
